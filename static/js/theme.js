@@ -1,7 +1,12 @@
-function setThemePreference(themeName, iconName) {
+function setThemePreference(themeName) {
   localStorage.setItem('themePreference', themeName);
+  document.documentElement.setAttribute('data-theme', themeName);
+}
+
+function setIconClass(iconName) {
   localStorage.setItem('iconClass', iconName);
-  updateTheme();
+  const themeIcon = document.getElementById('theme-icon');
+  themeIcon.className = iconName;
 }
 
 function getThemePreference() {
@@ -12,27 +17,19 @@ function getIconClass() {
   return localStorage.getItem('iconClass') || 'far fa-moon';
 }
 
-function updateTheme() {
-  const theme = getThemePreference();
-  const root = document.documentElement;
-
-  if (theme === 'light') {
-      root.style.setProperty('--bg-clr1', '#ffffff');
-      root.style.setProperty('--text-clr1', '#000000');
-      setThemePreference('light', 'far fa-moon');
-  } else {
-      root.style.setProperty('--bg-clr1', '#000000');
-      root.style.setProperty('--text-clr1', '#ffffff');
-      setThemePreference('dark', 'far fa-sun');
-  }
-}
-
 window.addEventListener('DOMContentLoaded', () => {
-  updateTheme();
+  const theme = getThemePreference();
+  const iconClass = getIconClass();
+  setThemePreference(theme);
+  setIconClass(iconClass);
 });
 
 const themeToggleBtn = document.getElementById('theme-toggle');
 
 themeToggleBtn.addEventListener('click', () => {
-  updateTheme();
+  const currentTheme = getThemePreference();
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  const newIcon = currentTheme === 'light' ? 'far fa-sun' : 'far fa-moon';
+  setThemePreference(newTheme);
+  setIconClass(newIcon);
 });

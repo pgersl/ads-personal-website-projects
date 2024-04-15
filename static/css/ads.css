@@ -25,6 +25,16 @@
     --link-bg-clr-light: #ffa60049;
 }
 
+:root[data-theme="light"] {
+    --bg-clr1: var(--bg-clr1-light);
+    --text-clr1: var(--text-clr1-light);
+}
+
+:root[data-theme="dark"] {
+    --bg-clr1: var(--bg-clr1-dark);
+    --text-clr1: var(--text-clr1-dark);
+}
+
 .list-item-container {
     border: solid var(--text-clr1);
 }
