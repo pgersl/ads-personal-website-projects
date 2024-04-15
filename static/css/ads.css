@@ -12,11 +12,34 @@
 }
 
 :root {
+    --bg-clr1-light: #ffffff;
+    --text-clr1-light: #000000;
+    --bg-clr1-dark: #000000;
+    --text-clr1-dark: #ffffff;
+    --bg-clr1: var(--bg-clr1-light);
+    --text-clr1: var(--text-clr1-light);
     --text-clr2: #5c5c5c;
     --link-clr: #ff7b00;
     --link-clr-light: #ffd000;
     --link-bg-clr: #ffa60083;
     --link-bg-clr-light: #ffa60049;
+}
+
+.list-item-container {
+    border: solid var(--text-clr1);
+}
+
+.debates-table {
+    border: 2px solid var(--text-clr1);
+}
+
+.debates-table th,
+.debates-table td {
+    border-left: 1px solid var(--text-clr1);
+}
+
+.debates-table th {
+    border-bottom: 1px solid var(--text-clr1);
 }
 
 ::selection {

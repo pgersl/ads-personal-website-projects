@@ -1,48 +1,45 @@
 function setThemePreference(themeName, iconName) {
   localStorage.setItem('themePreference', themeName);
   localStorage.setItem('iconClass', iconName);
+  updateTheme();
+}
+
+function updateTheme() {
+  const currentTheme = getThemePreference();
+  const themeIcon = document.getElementById('theme-icon');
+  const themeStyle = document.getElementById('theme-css');
+
+  if (currentTheme === '/css/ads-light.css') {
+      document.documentElement.style.setProperty('--bg-clr1', 'var(--bg-clr1-light)');
+      document.documentElement.style.setProperty('--text-clr1', 'var(--text-clr1-light)');
+      themeIcon.className = 'far fa-moon';
+      themeStyle.setAttribute('href', '/css/ads-light.css');
+  } else {
+      document.documentElement.style.setProperty('--bg-clr1', 'var(--bg-clr1-dark)');
+      document.documentElement.style.setProperty('--text-clr1', 'var(--text-clr1-dark)');
+      themeIcon.className = 'far fa-sun';
+      themeStyle.setAttribute('href', '/css/ads-dark.css');
+  }
 }
 
 function getThemePreference() {
   return localStorage.getItem('themePreference') || '/css/ads-light.css';
 }
 
-function getIconClass() {
-  return localStorage.getItem('iconClass') || 'far fa-moon';
-}
-
 window.addEventListener('DOMContentLoaded', () => {
-  const themeStyle = document.createElement('link');
-  themeStyle.setAttribute('id', 'theme-css');
-  themeStyle.setAttribute('rel', 'stylesheet');
-  themeStyle.setAttribute('href', getThemePreference());
-  document.head.appendChild(themeStyle);
-
   const themeIcon = document.getElementById('theme-icon');
-  themeIcon.className = getIconClass();
+  themeIcon.className = localStorage.getItem('iconClass') || 'far fa-moon';
+  updateTheme();
 });
 
 const themeToggleBtn = document.getElementById('theme-toggle');
 
 themeToggleBtn.addEventListener('click', () => {
   const currentTheme = getThemePreference();
-  const currentIcon = getIconClass();
-
-  let newTheme;
-  let newIcon;
 
   if (currentTheme === '/css/ads-light.css') {
-    newTheme = '/css/ads-dark.css';
-    newIcon = 'far fa-sun';
+      setThemePreference('/css/ads-dark.css', 'far fa-sun');
   } else {
-    newTheme = '/css/ads-light.css';
-    newIcon = 'far fa-moon';
+      setThemePreference('/css/ads-light.css', 'far fa-moon');
   }
-
-  const themeStyle = document.getElementById('theme-css');
-  themeStyle.setAttribute('href', newTheme);
-  setThemePreference(newTheme, newIcon);
-
-  const themeIcon = document.getElementById('theme-icon');
-  themeIcon.className = newIcon;
 });
