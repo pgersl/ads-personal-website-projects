@@ -1,0 +1,11 @@
+<div class="contact-container">
+    <div class="contact-info">
+        <h3>{{.Get "name"}}</h3>
+        {{with .Get "position"}}<p>{{.}}</p>{{end}}
+        {{with .Get "tel"}}<p><a href="tel:{{.}}">{{.}}</a></p>{{end}}
+        {{with .Get "mail"}}<p><a href="mailto:{{.}}">{{.}}</a></p>{{end}}
+    </div>
+    <div class="contact-img">
+        <img src="{{.Get "img"}}">
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{partial "ads-head.html" .}}
+    <body>
+        <div class="content">
+        {{partial "ads-nav.html" .}}
+        <header id="home-header">
+            Autonomní debatní spolek
+        </header>
+        <main>
+            {{.Content}}
+            <h1>Nejnovější debata</h1>
+            <div id="list">
+                {{range where .Site.Pages ".Params.debate" "==" true | first 1}}
+                    <a class="list-item-container debate-list-item-container" href="{{.RelPermalink}}">
+                        <div class="list-item-container-content">
+                            <h2>{{.Title}}</h2>
+                            <p>{{.Date | time.Format "2. 1. 2006"}} | {{.Params.time}} | {{.Params.place}}</p>
+                        </div>
+                    </a> 
+                {{ end }}
+            </div>
+            <h1>Aktuality</h1>
+            <div id="list">
+                {{range where .Site.Pages ".Params.news" "==" true | first 3}}
+                    <a class="list-item-container" href="{{.RelPermalink}}">
+                        <div class="list-item-container-content">
+                            <h3>{{.Title}}</h3>
+                            <p class="show-par">{{.Params.show}}</p>
+                            <p><em>{{.Date | time.Format "2. 1. 2006"}}</em></p>
+                        </div>
+                    </a>
+                {{end}}
+            </div>
+        </main>
+        {{partial "ads-footer.html" .}}
+        </div>
+    </body>
+</html>

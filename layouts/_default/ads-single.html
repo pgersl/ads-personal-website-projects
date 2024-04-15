@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{partial "ads-head.html" .}}
+    <body>
+        <div class="content">
+            {{partial "ads-nav.html" .}}
+            {{if .Params.info}}
+                <div class="single-info">
+                    <span>{{.Params.author}}</span>
+                    <span>{{.Date | time.Format "2. 1. 2006"}}</span>
+                </div>
+            {{end}}
+            <header>
+                {{.Title}}
+            </header>
+            {{if .Params.debate}}
+                <div class="debate-info">
+                    <table class="info-table">
+                        <tr>
+                            <th>Místo:</th>
+                            <td>{{.Params.place}}</td>
+                        </tr>
+                        <tr>
+                            <th>Datum:</th>
+                            <td>{{.Date | time.Format "2. 1. 2006"}}</td>
+                        </tr>
+                        <tr>
+                            <th>Čas:</th>
+                            <td>{{.Params.time}}</td>
+                        </tr>
+                    </table>
+                </div>
+            {{end}}
+            <main>
+                {{.Content}}
+            </main>
+            {{partial "ads-footer.html" .}}
+        </div>
+    </body>
+</html>
